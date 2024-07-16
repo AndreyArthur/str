@@ -167,6 +167,23 @@ str str_trim(str string) {
     return str_slice(string, start, chars);
 }
 
+static size_t str_occurrences_recursive(str string, str substring,
+                                        size_t occurrences) {
+    size_t index = str_index_of(string, substring);
+
+    if (index == SIZE_MAX) {
+        return occurrences;
+    }
+
+    str slice = str_slice(string, index + substring.size,
+                          string.size - (index + substring.size));
+    return str_occurrences_recursive(slice, substring, occurrences + 1);
+}
+
+size_t str_occurrences(str string, str substring) {
+    return str_occurrences_recursive(string, substring, 0);
+}
+
 void __str_print(str string) {
     char buffer[string.size + 1];
     printf("%s\n", str_to_native(string, buffer));

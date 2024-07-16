@@ -41,6 +41,8 @@ str str_to_lowercase(str string);
 
 str str_trim(str string);
 
+size_t str_occurrences(str string, str substring);
+
 void __str_print(str string);
 
 #endif

@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
 void test_str_from_native() {
@@ -241,6 +242,24 @@ void test_str_trim() {
     }
 }
 
+void test_str_occurrences() {
+    {
+        char native[] = "a fat cat has a hat at head";
+        str string = str_from_native(native);
+        str substring = str_from_native("at");
+
+        assert(str_occurrences(string, substring) == 4);
+    }
+
+    {
+        char native[] = "catcatcatcatcat";
+        str string = str_from_native(native);
+        str substring = str_from_native("cat");
+
+        assert(str_occurrences(string, substring) == 5);
+    }
+}
+
 int main() {
     test_str_from_native();
     test_str_from_buffer();
@@ -257,6 +276,7 @@ int main() {
     test_str_to_uppercase();
     test_str_to_lowercase();
     test_str_trim();
+    test_str_occurrences();
 
     return 0;
 }
