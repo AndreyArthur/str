@@ -184,6 +184,15 @@ size_t str_occurrences(str string, str substring) {
     return str_occurrences_recursive(string, substring, 0);
 }
 
+size_t str_replace_size(str string, str find, str replace) {
+    size_t occurrences = str_occurrences(string, find);
+    if (occurrences == 0) {
+        return string.size;
+    }
+
+    return string.size - find.size * occurrences + replace.size * occurrences;
+}
+
 void __str_print(str string) {
     char buffer[string.size + 1];
     printf("%s\n", str_to_native(string, buffer));

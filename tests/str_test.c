@@ -260,6 +260,26 @@ void test_str_occurrences() {
     }
 }
 
+void test_str_replace_size() {
+    {
+        char native[] = "not not, not not!";
+        str string = str_from_native(native);
+        str find = str_from_native("not");
+        str replace = str_from_native("dont");
+
+        assert(str_replace_size(string, find, replace) == 21);
+    }
+
+    {
+        char native[] = "not not, not not!";
+        str string = str_from_native(native);
+        str find = str_from_native("not");
+        str replace = str_from_native("no");
+
+        assert(str_replace_size(string, find, replace) == 13);
+    }
+}
+
 int main() {
     test_str_from_native();
     test_str_from_buffer();
@@ -277,6 +297,7 @@ int main() {
     test_str_to_lowercase();
     test_str_trim();
     test_str_occurrences();
+    test_str_replace_size();
 
     return 0;
 }
