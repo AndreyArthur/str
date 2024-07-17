@@ -15,6 +15,8 @@ TESTS_OBJECTS=$(patsubst $(TESTS_DIR)/%.c, $(OBJECTS_DIR)/%.o, $(TESTS_SOURCES))
 BIN_DIR=bin
 TESTS_BINS=$(patsubst $(TESTS_DIR)/%.c, $(BIN_DIR)/%, $(TESTS_SOURCES))
 
+all: $(LIB_OBJECTS)
+
 clean:
 	rm -rf $(BIN_DIR) $(OBJECTS_DIR)
 
