@@ -280,6 +280,41 @@ void test_str_replace_size() {
     }
 }
 
+void test_str_replace() {
+    {
+        char native[] = "not not, not not!";
+        str string = str_from_native(native);
+        str find = str_from_native("not");
+        str replace = str_from_native("dont");
+        char buffer[str_replace_size(string, find, replace)];
+        str replaced = str_replace(string, find, replace, buffer);
+
+        assert(str_equals(replaced, str_from_native("dont dont, dont dont!")));
+    }
+
+    {
+        char native[] = "not not, not not!";
+        str string = str_from_native(native);
+        str find = str_from_native("not");
+        str replace = str_from_native("no");
+        char buffer[str_replace_size(string, find, replace)];
+        str replaced = str_replace(string, find, replace, buffer);
+
+        assert(str_equals(replaced, str_from_native("no no, no no!")));
+    }
+
+    {
+        char native[] = "my dog is not a cat!";
+        str string = str_from_native(native);
+        str find = str_from_native("not ");
+        str replace = str_from_native("");
+        char buffer[str_replace_size(string, find, replace)];
+        str replaced = str_replace(string, find, replace, buffer);
+
+        assert(str_equals(replaced, str_from_native("my dog is a cat!")));
+    }
+}
+
 int main() {
     test_str_from_native();
     test_str_from_buffer();
@@ -298,6 +333,7 @@ int main() {
     test_str_trim();
     test_str_occurrences();
     test_str_replace_size();
+    test_str_replace();
 
     return 0;
 }

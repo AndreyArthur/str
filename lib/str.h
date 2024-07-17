@@ -45,6 +45,8 @@ size_t str_occurrences(str string, str substring);
 
 size_t str_replace_size(str string, str find, str replace);
 
+str str_replace(str string, str find, str replace, char *buffer);
+
 void __str_print(str string);
 
 #endif

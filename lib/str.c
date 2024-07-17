@@ -193,6 +193,33 @@ size_t str_replace_size(str string, str find, str replace) {
     return string.size - find.size * occurrences + replace.size * occurrences;
 }
 
+str str_replace(str string, str find, str replace, char *buffer) {
+    str replaced = {.data = buffer, .size = 0};
+
+    size_t string_index = 0;
+    size_t replaced_index = 0;
+
+    str slice = str_slice(string, 0, string.size);
+    while (string_index < string.size) {
+        if (str_index_of(slice, find) == 0) {
+            for (size_t index = 0; index < replace.size; index++) {
+                replaced.data[replaced_index] = replace.data[index];
+                replaced_index++;
+            }
+            string_index += find.size;
+        } else {
+            replaced.data[replaced_index] = string.data[string_index];
+            string_index++;
+            replaced_index++;
+        }
+        slice = str_slice(string, string_index, string.size - string_index);
+    }
+
+    replaced.size = replaced_index;
+
+    return replaced;
+}
+
 void __str_print(str string) {
     char buffer[string.size + 1];
     printf("%s\n", str_to_native(string, buffer));
