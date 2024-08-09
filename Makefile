@@ -22,14 +22,21 @@ clean:
 
 test: $(TESTS_BINS)
 
+runtest: $(TESTS_BINS)
+	./$(BIN_DIR)/str_test
+	./$(BIN_DIR)/strbuf_test
+
 $(LIB_OBJECTS): $(OBJECTS_DIR) $(LIB_SOURCES)
 	$(CC) $(CFLAGS) -c $(LIB_DIR)/str.c -o $(OBJECTS_DIR)/str.o
+	$(CC) $(CFLAGS) -c $(LIB_DIR)/strbuf.c -o $(OBJECTS_DIR)/strbuf.o
 
 $(TESTS_OBJECTS): $(OBJECTS_DIR) $(TESTS_SOURCES)
 	$(CC) $(CFLAGS) -c $(TESTS_DIR)/str_test.c -o $(OBJECTS_DIR)/str_test.o
+	$(CC) $(CFLAGS) -c $(TESTS_DIR)/strbuf_test.c -o $(OBJECTS_DIR)/strbuf_test.o
 
 $(TESTS_BINS): $(BIN_DIR) $(LIB_OBJECTS) $(TESTS_OBJECTS)
 	$(CC) $(CFLAGS) -o $(BIN_DIR)/str_test  $(OBJECTS_DIR)/str_test.o $(LIB_OBJECTS)
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/strbuf_test  $(OBJECTS_DIR)/strbuf_test.o $(LIB_OBJECTS)
 
 $(OBJECTS_DIR):
 	mkdir -p $@
