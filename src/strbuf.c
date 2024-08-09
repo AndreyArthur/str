@@ -1,5 +1,5 @@
-#include "strbuf.h"
-#include "str.h"
+#include "../include/strbuf.h"
+#include "../include/str.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
